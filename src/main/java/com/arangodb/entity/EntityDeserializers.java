@@ -48,6 +48,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 /**
+ * Entity deserializer , internally used.
+ *
  * @author tamtam180 - kirscheless at gmail.com
  * 
  */
@@ -641,8 +643,8 @@ public class EntityDeserializers {
         entity.fields = context.deserialize(obj.getAsJsonArray("fields"), fieldsType);
       }
 
-      if (obj.has("getJson")) {
-        entity.getJson = obj.getAsJsonPrimitive("getJson").getAsBoolean();
+      if (obj.has("geoJson")) {
+        entity.geoJson = obj.getAsJsonPrimitive("geoJson").getAsBoolean();
       }
 
       if (obj.has("isNewlyCreated")) {
@@ -915,6 +917,37 @@ public class EntityDeserializers {
       if (obj.has("updated")) {
         entity.count = entity.updated = obj.getAsJsonPrimitive("updated").getAsInt();
       }
+
+      return entity;
+    }
+
+  }
+
+  public static class TransactionResultEntityDeserializer implements JsonDeserializer<TransactionResultEntity> {
+
+    @Override
+    public TransactionResultEntity deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
+
+      if (json.isJsonNull()) {
+        return null;
+      }
+
+      JsonObject obj = json.getAsJsonObject();
+      TransactionResultEntity entity = deserializeBaseParameter(obj, new TransactionResultEntity());
+
+      if (obj.has("result")) { // MEMO:
+        if (obj.get("result") instanceof JsonObject) {
+          entity.setResult((Object) obj.get("result"));
+        } else if (obj.getAsJsonPrimitive("result").isBoolean()) {
+          entity.setResult((Boolean) (obj.getAsJsonPrimitive("result").getAsBoolean()));
+        } else if (obj.getAsJsonPrimitive("result").isNumber()) {
+          entity.setResult(obj.getAsJsonPrimitive("result").getAsNumber());
+        } else  if (obj.getAsJsonPrimitive("result").isString()) {
+          entity.setResult((String) (obj.getAsJsonPrimitive("result").getAsString()));
+        }
+      }
+
 
       return entity;
     }

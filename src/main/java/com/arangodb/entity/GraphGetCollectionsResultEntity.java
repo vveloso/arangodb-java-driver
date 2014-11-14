@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class GraphGetCollectionsResultEntity extends BaseEntity {
 
-    List<String> collections;
+  List<String> collections;
 
-    public List<String> getCollections() {
-        return collections;
-    }
+  public List<String> getCollections() {
+    return collections;
+  }
 
-    public void setCollections(List<String> collections) {
-        this.collections = collections;
-    }
+  public void setCollections(List<String> collections) {
+    this.collections = collections;
+  }
 
 }
