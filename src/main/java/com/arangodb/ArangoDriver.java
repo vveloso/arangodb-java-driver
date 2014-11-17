@@ -23,7 +23,49 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.arangodb.entity.*;
+import com.arangodb.entity.AdminLogEntity;
+import com.arangodb.entity.AqlFunctionsEntity;
+import com.arangodb.entity.ArangoUnixTime;
+import com.arangodb.entity.ArangoVersion;
+import com.arangodb.entity.BatchResponseEntity;
+import com.arangodb.entity.BooleanResultEntity;
+import com.arangodb.entity.CollectionEntity;
+import com.arangodb.entity.CollectionKeyOption;
+import com.arangodb.entity.CollectionOptions;
+import com.arangodb.entity.CollectionsEntity;
+import com.arangodb.entity.CursorEntity;
+import com.arangodb.entity.DatabaseEntity;
+import com.arangodb.entity.DefaultEntity;
+import com.arangodb.entity.DeletedEntity;
+import com.arangodb.entity.DocumentEntity;
+import com.arangodb.entity.DocumentResultEntity;
+import com.arangodb.entity.EdgeDefinitionEntity;
+import com.arangodb.entity.EdgeEntity;
+import com.arangodb.entity.Endpoint;
+import com.arangodb.entity.GraphEntity;
+import com.arangodb.entity.GraphsEntity;
+import com.arangodb.entity.ImportResultEntity;
+import com.arangodb.entity.IndexEntity;
+import com.arangodb.entity.IndexType;
+import com.arangodb.entity.IndexesEntity;
+import com.arangodb.entity.JobsEntity;
+import com.arangodb.entity.PlainEdgeEntity;
+import com.arangodb.entity.Policy;
+import com.arangodb.entity.ReplicationApplierConfigEntity;
+import com.arangodb.entity.ReplicationApplierStateEntity;
+import com.arangodb.entity.ReplicationInventoryEntity;
+import com.arangodb.entity.ReplicationLoggerConfigEntity;
+import com.arangodb.entity.ReplicationLoggerStateEntity;
+import com.arangodb.entity.ReplicationSyncEntity;
+import com.arangodb.entity.RestrictType;
+import com.arangodb.entity.ScalarExampleEntity;
+import com.arangodb.entity.SimpleByResultEntity;
+import com.arangodb.entity.StatisticsDescriptionEntity;
+import com.arangodb.entity.StatisticsEntity;
+import com.arangodb.entity.StringsResultEntity;
+import com.arangodb.entity.TransactionEntity;
+import com.arangodb.entity.TransactionResultEntity;
+import com.arangodb.entity.UserEntity;
 import com.arangodb.http.BatchHttpManager;
 import com.arangodb.http.BatchPart;
 import com.arangodb.http.HttpManager;
@@ -4739,7 +4781,10 @@ public class ArangoDriver extends BaseArangoDriver {
     String query = "for i in graph_edges(@graphName, null) return i";
     Map<String, Object> bindVars = new MapBuilder().put("graphName", graphName).get();
 
-    CursorEntity<PlainEdgeEntity> result = this.executeQuery(query, bindVars, PlainEdgeEntity.class, true, 20);
+    CursorEntity<PlainEdgeEntity> result = this.executeQuery(query, bindVars, PlainEdgeEntity.class, true, 0);
+
+    int count = result.getCount();
+    result = this.executeQuery(query, bindVars, PlainEdgeEntity.class, true, count);
 
     return result;
 
@@ -4762,7 +4807,9 @@ public class ArangoDriver extends BaseArangoDriver {
     Map<String, Object> bindVars = new MapBuilder().put("graphName", graphName)
         .put("vertexDocumentHandle", vertexDocumentHandle).get();
 
-    CursorEntity<T> result = this.executeQuery(query, bindVars, clazz, true, 20);
+    CursorEntity<T> result = this.executeQuery(query, bindVars, clazz, true, 0);
+    int count = result.getCount();
+    result = this.executeQuery(query, bindVars, clazz, true, count);
 
     return result;
 

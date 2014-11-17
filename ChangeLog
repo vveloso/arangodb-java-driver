@@ -1,3 +1,13 @@
+v2.2.1(2014-11-14)
+--------------------------
+* support for ArangoDB version 2.2.x
+* add support of new graph api
+* removed old graph functions
+* add async mode
+* add batch mode
+* add aqlfunctions
+ 
+
 
 v1.4.1(2014-02-04)
 ---------------------------
