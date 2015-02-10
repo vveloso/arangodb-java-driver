@@ -65,7 +65,7 @@ public class ArangoConfigureTest {
 
   }
 
-  @Ignore
+/*  @Ignore
   @Test
   public void connect_timeout() throws ArangoException {
 
@@ -84,7 +84,7 @@ public class ArangoConfigureTest {
 
     configure.shutdown();
 
-  }
+  }*/
 
   @Test
   public void so_connect_timeout() throws ArangoException {
