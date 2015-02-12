@@ -20,13 +20,13 @@ To add the driver to your project with maven, add the following code to your pom
   <dependency>
     <groupId>com.arangodb</groupId>
     <artifactId>arangodb-java-driver</artifactId>
-    <version>[2.4.1-SNAPSHOT,2.4.1]</version>
+    <version>[2.4.2-SNAPSHOT,2.4.2]</version>
   </dependency>
 	....
 </dependencies>
 ```
 
-If you want to test with a snapshot version (e.g. 2.4.1-SNAPSHOT), add the staging repository of oss.sonatype.org to your pom.xml:
+If you want to test with a snapshot version (e.g. 2.4.2-SNAPSHOT), add the staging repository of oss.sonatype.org to your pom.xml:
 
 ```XML
 <repositories>
@@ -349,14 +349,7 @@ Now an edge can be created to set a relation between vertices
       null);
 ``` 
 
-# Known bugs
-Due to deserializition of some attribute combinations of name/type may lead to exceptions.
-These combinations are:
+# What's new in 2.4
 
-| attribute name | attribute type |
-|----------------|----------------|
-| error          | boolean        |
-| code           | numeric        |
-| errorNum       | numeric        |
-| errorMessage   | String         |
-| etag           | numeric        |
+## since 2.4.2
+Fixed issue#2
