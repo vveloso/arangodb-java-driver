@@ -351,5 +351,8 @@ Now an edge can be created to set a relation between vertices
 
 # What's new in 2.4
 
+## since 2.4.1
+httpclient version 4.3.6
+
 ## since 2.4.2
 Fixed issue#2
