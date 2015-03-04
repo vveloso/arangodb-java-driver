@@ -370,3 +370,11 @@ Fixed issue#2
 
 ## since 2.5.0
 Added support for sparse indexes
+
+## since 2.5.1
+* fixed issue #5
+  * added method to driver.createGraph(GraphEntity g); 
+* fixed issue #6
+* fixed issue #7 
+
+
