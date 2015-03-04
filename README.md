@@ -366,3 +366,11 @@ Now an edge can be created to set a relation between vertices
 * Some additional methods in EdgeDefinitionsEntity:
   * public int getSize()
   * public EdgeDefinitionEntity getEdgeDefinition(String collectionName)
+
+## since 2.4.4
+* fixed issue #5
+  * added method to driver.createGraph(GraphEntity g); 
+* fixed issue #6
+* fixed issue #7 
+
+
