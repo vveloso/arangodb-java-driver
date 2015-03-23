@@ -377,4 +377,5 @@ Added support for sparse indexes
 * fixed issue #6
 * fixed issue #7 
 
-
+## since 2.5.2
+* EntityFactory allows fine-tuning of Gson
