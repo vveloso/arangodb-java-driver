@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 tamtam180
+ * Copyright (C) 2015 tporadowski
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,29 @@
  * limitations under the License.
  */
 
-package com.arangodb.entity;
+package com.arangodb;
+
+import java.lang.reflect.Type;
+
+import com.google.gson.InstanceCreator;
 
 /**
- * Index Type.
- * @author tamtam180 - kirscheless at gmail.com
- * @see http://www.arangodb.com/manuals/current/HttpIndex.html#HttpIndexIntro
+ * @author tporadowski - tomasz at poradowski.com
  */
-public enum IndexType {
-  /** Primary Index */
-  PRIMARY,
-  /** Edge Index */
-  EDGE,
-  /** Cap Index */
-  CAP,
-  /** Geo Index */
-  GEO,
-  /** Hash Index */
-  HASH,
-  /** Skiplist Index */
-  SKIPLIST,
-  /** Fulltext Inex */
-  FULLTEXT
+public class TestInterfaceInstanceCreator implements
+		InstanceCreator<TestInterface> {
+
+	private int counter;
+	
+	@Override
+	public TestInterface createInstance(Type type) {
+		return new TestInterfaceImpl("name " + counter++);
+	}
+
+	/**
+	 * @return the counter
+	 */
+	public int getCounter() {
+		return counter;
+	}
 }

@@ -749,6 +749,10 @@ public class EntityDeserializers {
       if (obj.has("unique")) {
         entity.unique = obj.getAsJsonPrimitive("unique").getAsBoolean();
       }
+      
+      if (obj.has("sparse")) {
+        entity.sparse = obj.getAsJsonPrimitive("sparse").getAsBoolean();
+      }
 
       if (obj.has("size")) {
         entity.size = obj.getAsJsonPrimitive("size").getAsInt();
@@ -756,6 +760,10 @@ public class EntityDeserializers {
 
       if (obj.has("minLength")) {
         entity.minLength = obj.getAsJsonPrimitive("minLength").getAsInt();
+      }
+      
+      if (obj.has("selectivityEstimate")) {
+        entity.selectivityEstimate = obj.getAsJsonPrimitive("selectivityEstimate").getAsDouble();
       }
 
       return entity;

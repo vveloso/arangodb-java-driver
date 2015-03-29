@@ -1,11 +1,11 @@
 
 This library is a Java driver for ArangoDB.
 
-Supported version: ArangoDB-2.4.x
+Supported version: ArangoDB-2.4.x or ArangoDB 2.5.x
 
 # Required
 
-* [ArangoDB](https://github.com/triAGENS/ArangoDB) version 2.4.x
+* [ArangoDB](https://github.com/arangodb/arangodb) version 2.4.x or 2.5.x
 * Java 1.6 later
 
 
@@ -13,20 +13,21 @@ Supported version: ArangoDB-2.4.x
 
 ## Maven
 
-To add the driver to your project with maven, add the following code to your pom.xml:
+To add the driver to your project with maven, add the following code to your pom.xml
+(please use a driver with a version number compatible to your ArangoDB server's version):
 
 ```XML
 <dependencies>
   <dependency>
     <groupId>com.arangodb</groupId>
     <artifactId>arangodb-java-driver</artifactId>
-    <version>[2.4.2-SNAPSHOT,2.4.2]</version>
+    <version>[2.5.3-SNAPSHOT,2.5.3]</version>
   </dependency>
 	....
 </dependencies>
 ```
 
-If you want to test with a snapshot version (e.g. 2.4.2-SNAPSHOT), add the staging repository of oss.sonatype.org to your pom.xml:
+If you want to test with a snapshot version (e.g. 2.5.3-SNAPSHOT), add the staging repository of oss.sonatype.org to your pom.xml:
 
 ```XML
 <repositories>
@@ -287,7 +288,7 @@ A graph consists of vertices and edges (stored in collections). Which collection
   // and add one or more collections
   from.add("myCollection1");
   from.add("myCollection2");
-  edgeDefinition.setFrom(from)
+  edgeDefinition.setFrom(from);
    
   // repeat this for the collections where an edge is going into  
   List<String> to = new ArrayList<String>();
@@ -349,13 +350,13 @@ Now an edge can be created to set a relation between vertices
       null);
 ``` 
 
-# What's new in 2.4
+# What's new in 2.4 / 2.5
 
 ## since 2.4.1
-* httpclient version 4.3.6
+httpclient version 4.3.6
 
 ## since 2.4.2
-* Fixed issue#2
+Fixed issue#2
 
 ## since 2.4.3
 * Fixed a graph bug: when retrieving a graph via the driver, "from" and "to" were emtpy. This is fixed now. 
@@ -373,4 +374,8 @@ Now an edge can be created to set a relation between vertices
 * fixed issue #6
 * fixed issue #7 
 
+## since 2.5.0
+Added support for sparse indexes
 
+## since 2.5.1
+see 2.4.4

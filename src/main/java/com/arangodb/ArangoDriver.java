@@ -1992,6 +1992,22 @@ public class ArangoDriver extends BaseArangoDriver {
       throws ArangoException {
     return createIndex(String.valueOf(collectionId), type, unique, fields);
   }
+  
+  /**
+   * This method creates an index for a collection.
+   *
+   * @param collectionId The collection id.
+   * @param type the index type.
+   * @param unique if set to true the index will be a unique index
+   * @param sparse if set to true the index will be sparse
+   * @param fields the fields (document attributes) the index is created on
+   * @return IndexEntity
+   * @throws ArangoException
+   */
+  public IndexEntity createIndex(long collectionId, IndexType type, boolean unique, boolean sparse, String... fields)
+      throws ArangoException {
+    return createIndex(String.valueOf(collectionId), type, unique, sparse, fields);
+  }
 
   /**
    * This method creates an index for a collection.
@@ -2007,6 +2023,22 @@ public class ArangoDriver extends BaseArangoDriver {
       throws ArangoException {
     return indexDriver.createIndex(getDefaultDatabase(), collectionName, type, unique, fields);
   }
+  
+  /**
+   * This method creates an index for a collection.
+   *
+   * @param collectionName The collection name.
+   * @param type the index type.
+   * @param unique if set to true the index will be a unique index
+   * @param sparse if set to true the index will be sparse
+   * @param fields the fields (document attributes) the index is created on
+   * @return IndexEntity
+   * @throws ArangoException
+   */
+  public IndexEntity createIndex(String collectionName, IndexType type, boolean unique, boolean sparse, String... fields)
+      throws ArangoException {
+    return indexDriver.createIndex(getDefaultDatabase(), collectionName, type, unique, sparse, fields);
+  }
 
   /**
    * This method creates a hash index for a collection.
@@ -2019,6 +2051,20 @@ public class ArangoDriver extends BaseArangoDriver {
    */
   public IndexEntity createHashIndex(String collectionName, boolean unique, String... fields) throws ArangoException {
     return indexDriver.createIndex(getDefaultDatabase(), collectionName, IndexType.HASH, unique, fields);
+  }
+  
+  /**
+   * This method creates a hash index for a collection.
+   *
+   * @param collectionName The collection name.
+   * @param unique if set to true the index will be a unique index
+   * @param sparse if set to true the index will be sparse
+   * @param fields the fields (document attributes) the index is created on
+   * @return IndexEntity
+   * @throws ArangoException
+   */
+  public IndexEntity createHashIndex(String collectionName, boolean unique, boolean sparse, String... fields) throws ArangoException {
+    return indexDriver.createIndex(getDefaultDatabase(), collectionName, IndexType.HASH, unique, sparse, fields);
   }
 
   /**
@@ -2046,6 +2092,21 @@ public class ArangoDriver extends BaseArangoDriver {
   public IndexEntity createSkipListIndex(String collectionName, boolean unique, String... fields)
       throws ArangoException {
     return indexDriver.createIndex(getDefaultDatabase(), collectionName, IndexType.SKIPLIST, unique, fields);
+  }
+  
+  /**
+   * This method creates a skip list index for a collection.
+   *
+   * @param collectionName The collection name.
+   * @param unique if set to true the index will be a unique index
+   * @param sparse if set to true the index will be sparse
+   * @param fields the fields (document attributes) the index is created on
+   * @return IndexEntity
+   * @throws ArangoException
+   */
+  public IndexEntity createSkipListIndex(String collectionName, boolean unique, boolean sparse, String... fields)
+      throws ArangoException {
+    return indexDriver.createIndex(getDefaultDatabase(), collectionName, IndexType.SKIPLIST, unique, sparse, fields);
   }
 
   /**
