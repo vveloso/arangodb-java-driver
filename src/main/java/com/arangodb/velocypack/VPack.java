@@ -28,6 +28,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -557,18 +558,30 @@ public class VPack {
 		final Object entity,
 		final VPackBuilder builder,
 		final Map<String, Object> additionalFields)
-			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, VPackException {
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		final Map<String, FieldInfo> fields = cache.getFields(entity.getClass());
+		addAdditionalFieldValues(builder, additionalFields, fields);
 		for (final FieldInfo fieldInfo : fields.values()) {
 			if (fieldInfo.isSerialize()) {
 				serializeField(entity, builder, fieldInfo, additionalFields);
 			}
 		}
-		for (final Entry<String, Object> entry : additionalFields.entrySet()) {
+	}
+
+	private void addAdditionalFieldValues(
+		final VPackBuilder builder,
+		final Map<String, Object> additionalFields,
+		final Map<String, FieldInfo> fields)
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		final Iterator<Entry<String, Object>> entryIterator = additionalFields.entrySet().iterator();
+		while (entryIterator.hasNext()) {
+			final Entry<String, Object> entry = entryIterator.next();
 			final String key = entry.getKey();
 			if (!fields.containsKey(key)) {
 				final Object value = entry.getValue();
-				addValue(key, value != null ? value.getClass() : null, value, builder, null, additionalFields);
+				entryIterator.remove();
+				addValue(key, value != null ? value.getClass() : null, value, builder, null,
+						Collections.<String, Object>emptyMap());
 			}
 		}
 	}

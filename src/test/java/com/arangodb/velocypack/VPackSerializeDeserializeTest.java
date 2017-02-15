@@ -3298,6 +3298,36 @@ public class VPackSerializeDeserializeTest {
 		assertThat(entity.c2, is(notNullValue()));
 	}
 
+	protected static class TestEntityWithInnerEntityString {
+		private TestEntityString inner;
+
+		public TestEntityString getInner() {
+			return inner;
+		}
+
+		public void setInner(TestEntityString inner) {
+			this.inner = inner;
+		}
+	}
+
+	@Test
+	public void additionalFieldsOnOuterEntityOnly() throws VPackException {
+		final TestEntityWithInnerEntityString entity = new TestEntityWithInnerEntityString();
+		entity.setInner(new TestEntityString());
+		final Map<String, Object> additionalFields = new HashMap<String, Object>();
+		additionalFields.put("a", "test");
+		final VPackSlice vpack = new VPack.Builder().build().serialize(entity, additionalFields);
+		assertThat(vpack, is(notNullValue()));
+		assertThat(vpack.getLength(), is(2));
+		final VPackSlice s = vpack.get("inner");
+		assertThat(s.isObject(), is(true));
+		assertThat(s.size(), is(3));
+		assertThat(s.get("s").getAsString(), is("test"));
+		final VPackSlice a = vpack.get("a");
+		assertThat(a.isString(), is(true));
+		assertThat(a.getAsString(), is("test"));
+	}
+
 	@Test
 	public void additionalFields() throws VPackException {
 		final TestEntityString entity = new TestEntityString();
